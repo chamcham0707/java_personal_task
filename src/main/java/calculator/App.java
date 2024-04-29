@@ -12,7 +12,7 @@ public class App {
         int num1, num2;
         char operator;
         LinkedList<Double> result = new LinkedList<Double>(); // 추가와 삭제가 빈번하므로 linkedlist로 선택하였다.
-        String repeat, firstRemove;
+        String repeat, firstRemove, inquiry;
         boolean isLast = false;
         while (true) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
@@ -66,9 +66,18 @@ public class App {
             if (firstRemove.equals("remove"))
                 result.removeFirst();
 
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            inquiry = sc.next();
+            if (inquiry.equals("inquiry")) {
+                System.out.print("[ ");
+                for (double d : result)
+                    System.out.print(d + " ");
+                System.out.println("]");
+            }
+
             // exit를 입력하면 while문을 빠져나가 프로그램 종료
             // exit외의 값이 입력되면 반복해서 계산한다.
-            System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료) ");
             repeat = sc.next();
             if (repeat.equals("exit")) break;
         }
