@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class App {
 
@@ -10,9 +11,8 @@ public class App {
         // 반복문을 돌면서 메모리 할당과 삭제를 반복하지 않도록하기 위해 반복문 밖에서 선언
         int num1, num2;
         char operator;
-        double[] result = new double[10];
-        int index = -1;
-        String repeat;
+        LinkedList<Double> result = new LinkedList<Double>(); // 추가와 삭제가 빈번하므로 linkedlist로 선택하였다.
+        String repeat, firstRemove;
         boolean isLast = false;
         while (true) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
@@ -41,17 +41,10 @@ public class App {
             // charAt(int index): String의 String[index] 값을 가져와준다.
             operator = sc.next().charAt(0);
 
-            // result 배열이 꽉 찼다면 가장 먼저 저장된 값부터 값을 덮어쓴다.
-            // 그게 아니라면 index 값을 증가시킨다.
-            if (index >= result.length - 1)
-                for (int i = 0; i < result.length - 1; ++i)
-                    result[i] = result[i + 1];
-            else ++index;
-
             switch(operator) {
-                case '+': result[index] = num1 + num2; break;
-                case '-': result[index] = num1 - num2; break;
-                case '*': result[index] = num1 * num2; break;
+                case '+': result.add((double)num1 + num2); break;
+                case '-': result.add((double)num1 - num2); break;
+                case '*': result.add((double)num1 * num2); break;
                 case '/':
                     // 분모에 0이 오지 않도록하는 코드
                     if (num2 == 0) {
@@ -59,19 +52,24 @@ public class App {
                         break;
                     }
 
-                    result[index] = (double)num1 / num2;
+                    result.add((double)num1 / num2);
                     break;
                 default:
                     System.out.println("잘못된 연산자를 입력하였습니다. +, -, *, / 중에 하나를 입력하세요.");
             }
 
-            System.out.println("결과: " + result[index]);
+            System.out.println("결과: " + result.getLast());
 
-            System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
-            repeat = sc.next();
+            // 가장 첫번째 값을 삭제한다.
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+            firstRemove = sc.next();
+            if (firstRemove.equals("remove"))
+                result.removeFirst();
 
             // exit를 입력하면 while문을 빠져나가 프로그램 종료
             // exit외의 값이 입력되면 반복해서 계산한다.
+            System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
+            repeat = sc.next();
             if (repeat.equals("exit")) break;
         }
     }
