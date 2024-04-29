@@ -9,9 +9,10 @@ public class App {
 
         int num1, num2;
         char operator;
-        double result;
+        double[] result = new double[10];
+        int index = 0;
         String repeat;
-        while (true) {
+        while (index < 10) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
             if (sc.hasNextInt()) { // sc.hasNextInt(): 정수값인지 확인하는 함수
                 num1 = sc.nextInt();
@@ -38,11 +39,12 @@ public class App {
             // charAt(int index): String의 String[index] 값을 가져와준다.
             operator = sc.next().charAt(0);
 
-            result = 0;
+            System.out.println(num1 + " " + num2 + " " + operator);
+
             switch(operator) {
-                case '+': result = num1 + num2; break;
-                case '-': result = num1 - num2; break;
-                case '*': result = num1 * num2; break;
+                case '+': result[index] = num1 + num2; break;
+                case '-': result[index] = num1 - num2; break;
+                case '*': result[index] = num1 * num2; break;
                 case '/':
                     // 분모에 0이 오지 않도록하는 코드
                     if (num2 == 0) {
@@ -50,13 +52,14 @@ public class App {
                         break;
                     }
 
-                    result = (double)num1 / num2;
+                    result[index] = (double)num1 / num2;
                     break;
                 default:
                     System.out.println("잘못된 연산자를 입력하였습니다. +, -, *, / 중에 하나를 입력하세요.");
             }
 
-            System.out.println("결과: " + result);
+            System.out.println("결과: " + result[index]);
+            ++index;
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
             repeat = sc.next();
