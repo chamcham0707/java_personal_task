@@ -11,5 +11,10 @@ public class App {
         int num1 = sc.nextInt();
         System.out.print("두 번째 숫자를 입력하세요: ");
         int num2 = sc.nextInt();
+        System.out.print("사칙연산 기호를 입력하세요: ");
+
+        // sc.next(): 입력받은 것을 String으로 받아온다.
+        // charAt(int index): String의 String[index] 값을 가져와준다.
+        char operator = sc.next().charAt(0);
     }
 }
