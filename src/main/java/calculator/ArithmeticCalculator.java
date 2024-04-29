@@ -7,7 +7,7 @@ public class ArithmeticCalculator extends Calculator {
     public ArithmeticCalculator() {
         super();
 
-        operator = new Operator[]{new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator()};
+        operator = new Operator[]{new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator(), new RemainderOperator()};
     }
 
     public void calculate() throws ArithmeticException, OperatorException {
@@ -18,12 +18,13 @@ public class ArithmeticCalculator extends Calculator {
         System.out.print("두 번째 숫자를 입력해주세요: ");
         int num2 = sc.nextInt();
 
-        double result = 0;
+        int result = 0;
         switch(operation) {
             case '+': result = operator[0].operate(num1, num2); break;
             case '-': result = operator[1].operate(num1, num2); break;
             case '*': result = operator[2].operate(num1, num2); break;
             case '/': result = operator[3].operate(num1, num2); break;
+            case '%': result = operator[3].operate(num1, num2); break;
             default: throw new OperatorException("잘못된 연산자입니다.");
         }
 
