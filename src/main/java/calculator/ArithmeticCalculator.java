@@ -1,29 +1,34 @@
 package calculator;
 
 public class ArithmeticCalculator extends Calculator {
-    private final AddOperator addOperator;
-    private final SubtractOperator subtractOperator;
-    private final MultiplyOperator multiplyOperator;
-    private final DivideOperator divideOperator;
+
+    Operator[] operator;
 
     public ArithmeticCalculator() {
         super();
-        this.addOperator = new AddOperator();
-        this.subtractOperator = new SubtractOperator();
-        this.multiplyOperator = new MultiplyOperator();
-        this.divideOperator = new DivideOperator();
-    }
-    public void calculate(int num1, int num2, char operator) throws ArithmeticException, OperatorException {
-        double answer = 0;
 
-        switch(operator) {
-            case '+': answer = addOperator.operate(num1, num2); break;
-            case '-': answer = subtractOperator.operate(num1, num2); break;
-            case '*': answer = multiplyOperator.operate(num1, num2); break;
-            case '/': answer = divideOperator.operate(num1, num2); break;
-            default: throw new OperatorException("잘못된 사칙연산 기호입니다.");
+        operator = new Operator[]{new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator()};
+    }
+
+    public void calculate() throws ArithmeticException, OperatorException {
+        System.out.print("첫 번째 숫자를 입력해주세요: ");
+        int num1 = sc.nextInt();
+        System.out.print("연산자를 입력해주세요: ");
+        char operation = sc.next().charAt(0);
+        System.out.print("두 번째 숫자를 입력해주세요: ");
+        int num2 = sc.nextInt();
+
+        double result = 0;
+        switch(operation) {
+            case '+': result = operator[0].operate(num1, num2); break;
+            case '-': result = operator[1].operate(num1, num2); break;
+            case '*': result = operator[2].operate(num1, num2); break;
+            case '/': result = operator[3].operate(num1, num2); break;
+            default: throw new OperatorException("잘못된 연산자입니다.");
         }
 
-        results.add(answer);
+        setResults(result);
+
+        System.out.println("결과: " + getLastResult());
     }
 }

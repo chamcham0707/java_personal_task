@@ -1,32 +1,27 @@
 package calculator;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public abstract class Calculator {
     LinkedList<Double> results;
+
+    static Scanner sc = new Scanner(System.in);
 
     public Calculator() {
         results = new LinkedList<Double>();
     }
 
-    public double resultGetter(int index) { // 해당 index의 값을 반환해준다.
-        return results.get(index);
-    }
+    // ArithmeticCalculator class와 CircleCalculator class가 무조건 구현할 수 있도록 추상 메서드로 선언했다.
+    abstract void calculate() throws OperatorException;
 
-    public double resultGetLast() { // result list의 마지막 값을 반환해준다.
+    // 공통된 메소드이다.
+    public double getLastResult() {
         return results.getLast();
     }
 
-    public void resultSetter(int index, double element) { // result list에 해당 index에 element 값을 넣어준다.
-        results.set(index, element);
-    }
-
-    public int resultSize() { // result의 크기를 반환해준다.
-        return results.size();
-    }
-
-    public void removeResult() { // result list에서 첫번째 인덱스를 삭제한다.
-        results.removeFirst();
+    public void setResults(double result) {
+        results.add(result);
     }
 
     public void inquiryResults() {
@@ -34,5 +29,17 @@ public abstract class Calculator {
         for (double d : results)
             System.out.print(d + " ");
         System.out.println("]");
+    }
+
+    public void removeResults() {
+        inquiryResults();
+        System.out.print("몇 번째 값을 삭제하고 싶습니까? ");
+        int index = sc.nextInt();
+        System.out.print("정말 삭제를 원하시면 remove를 입력해주세요: ");
+        String remove = sc.next();
+        if (remove.equals("remove")) {
+            results.remove(index - 1);
+            System.out.println("삭제를 완료했습니다.");
+        } else System.out.println("아무것도 삭제하지 않았습니다.");
     }
 }
