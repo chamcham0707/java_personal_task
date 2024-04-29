@@ -5,9 +5,10 @@ import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator(); // Calculator 인스턴스 생성
-
         Scanner sc = new Scanner(System.in);
+
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        CircleCalculator circleCalculator = new CircleCalculator();
 
         // 반복문을 돌면서 메모리 할당과 삭제를 반복하지 않도록하기 위해 반복문 밖에서 선언
         int input, num1, num2;
@@ -48,7 +49,7 @@ public class App {
                     operator = sc.next().charAt(0);
 
                     try {
-                        calculator.calculate(num1, num2, operator);
+                        arithmeticCalculator.calculate(num1, num2, operator);
                     } catch(ArithmeticException e) {
                         System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 올 수 없습니다.");
                         continue;
@@ -57,16 +58,16 @@ public class App {
                         continue;
                     }
 
-                    System.out.println("결과: " + calculator.resultGetLast());
+                    System.out.println("결과: " + arithmeticCalculator.resultGetLast());
 
                     // 가장 첫번째 값을 삭제한다.
                     System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
                     firstRemove = sc.next();
-                    if (firstRemove.equals("remove")) calculator.removeResult();
+                    if (firstRemove.equals("remove")) arithmeticCalculator.removeResult();
 
                     System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
                     inquiry = sc.next();
-                    if (inquiry.equals("inquiry")) calculator.inquiryResults();
+                    if (inquiry.equals("inquiry")) arithmeticCalculator.inquiryResults();
 
                     // exit를 입력하면 while 문을 빠져나가 프로그램 종료
                     // exit외의 값이 입력되면 반복해서 계산한다.
@@ -77,13 +78,13 @@ public class App {
                 case 2:
                     System.out.print("원의 반지름을 입력해주세요: ");
                     num1 = sc.nextInt();
-                    calculator.calculateCircleArea(num1);
+                    circleCalculator.calculate(num1);
 
-                    System.out.println("결과: " + calculator.circleGetLast());
+                    System.out.println("결과: " + circleCalculator.resultGetLast());
 
                     System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
                     inquiry = sc.next();
-                    if (inquiry.equals("inquiry")) calculator.inquiryCircle();
+                    if (inquiry.equals("inquiry")) circleCalculator.inquiryResults();
 
                     // exit를 입력하면 while 문을 빠져나가 프로그램 종료
                     // exit외의 값이 입력되면 반복해서 계산한다.
