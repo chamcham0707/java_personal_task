@@ -59,7 +59,7 @@ public class App {
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             inquiry = sc.next();
-            if (inquiry.equals("inquiry")) calculator.resultInquiry();
+            if (inquiry.equals("inquiry")) calculator.inquiryResults();
 
             // exit를 입력하면 while 문을 빠져나가 프로그램 종료
             // exit외의 값이 입력되면 반복해서 계산한다.

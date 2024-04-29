@@ -35,7 +35,7 @@ public class Calculator {
         result.removeFirst();
     }
 
-    public void resultInquiry() {
+    public void inquiryResults() {
         System.out.print("[ ");
         for (double d : result)
             System.out.print(d + " ");
