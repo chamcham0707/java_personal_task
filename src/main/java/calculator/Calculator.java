@@ -3,7 +3,23 @@ package calculator;
 import java.util.LinkedList;
 
 public class Calculator {
-    private LinkedList<Double> result = new LinkedList<Double>();
+    private LinkedList<Double> result;
+
+    public Calculator() {
+        result = new LinkedList<Double>();
+    }
+
+    public Calculator(int num1, int num2, char operator) throws ArithmeticException, OperatorException {
+        result = new LinkedList<Double>();
+
+        switch(operator) {
+            case '+': result.add((double)num1 + num2); break;
+            case '-': result.add((double)num1 - num2); break;
+            case '*': result.add((double)num1 * num2); break;
+            case '/': result.add((double)num1 / num2); break;
+            default: throw new OperatorException("잘못된 사칙연산 기호입니다. ");
+        }
+    }
 
     public void calculate(int num1, int num2, char operator) throws ArithmeticException, OperatorException {
         switch(operator) {
