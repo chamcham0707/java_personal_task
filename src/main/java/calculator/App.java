@@ -7,12 +7,14 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        // 반복문을 돌면서 메모리 할당과 삭제를 반복하지 않도록하기 위해 반복문 밖에서 선언
         int num1, num2;
         char operator;
         double[] result = new double[10];
-        int index = 0;
+        int index = -1;
         String repeat;
-        while (index < 10) {
+        boolean isLast = false;
+        while (true) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
             if (sc.hasNextInt()) { // sc.hasNextInt(): 정수값인지 확인하는 함수
                 num1 = sc.nextInt();
@@ -39,7 +41,12 @@ public class App {
             // charAt(int index): String의 String[index] 값을 가져와준다.
             operator = sc.next().charAt(0);
 
-            System.out.println(num1 + " " + num2 + " " + operator);
+            // result 배열이 꽉 찼다면 가장 먼저 저장된 값부터 값을 덮어쓴다.
+            // 그게 아니라면 index 값을 증가시킨다.
+            if (index >= result.length - 1)
+                for (int i = 0; i < result.length - 1; ++i)
+                    result[i] = result[i + 1];
+            else ++index;
 
             switch(operator) {
                 case '+': result[index] = num1 + num2; break;
@@ -59,7 +66,6 @@ public class App {
             }
 
             System.out.println("결과: " + result[index]);
-            ++index;
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) ");
             repeat = sc.next();
