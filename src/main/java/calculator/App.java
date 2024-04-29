@@ -12,9 +12,7 @@ public class App {
         // 반복문을 돌면서 메모리 할당과 삭제를 반복하지 않도록하기 위해 반복문 밖에서 선언
         int num1, num2;
         char operator;
-        LinkedList<Double> result = new LinkedList<Double>(); // 추가와 삭제가 빈번하므로 linkedlist로 선택하였다.
         String repeat, firstRemove, inquiry;
-        boolean isLast = false;
         while (true) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
             if (sc.hasNextInt()) { // sc.hasNextInt(): 정수값인지 확인하는 함수
@@ -43,8 +41,7 @@ public class App {
             operator = sc.next().charAt(0);
 
             try {
-                double output = calculator.calculate(num1, num2, operator);
-                result.add(output);
+                calculator.calculate(num1, num2, operator);
             } catch(ArithmeticException e) {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 올 수 없습니다.");
                 continue;
@@ -53,24 +50,18 @@ public class App {
                 continue;
             }
 
-            System.out.println("결과: " + result.getLast());
+            System.out.println("결과: " + calculator.resultGetLast());
 
             // 가장 첫번째 값을 삭제한다.
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             firstRemove = sc.next();
-            if (firstRemove.equals("remove"))
-                result.removeFirst();
+            if (firstRemove.equals("remove")) calculator.resultRemove(0);
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             inquiry = sc.next();
-            if (inquiry.equals("inquiry")) {
-                System.out.print("[ ");
-                for (double d : result)
-                    System.out.print(d + " ");
-                System.out.println("]");
-            }
+            if (inquiry.equals("inquiry")) calculator.resultInquiry();
 
-            // exit를 입력하면 while문을 빠져나가 프로그램 종료
+            // exit를 입력하면 while 문을 빠져나가 프로그램 종료
             // exit외의 값이 입력되면 반복해서 계산한다.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료) ");
             repeat = sc.next();

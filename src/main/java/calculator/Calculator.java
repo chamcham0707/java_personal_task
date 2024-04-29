@@ -1,18 +1,45 @@
 package calculator;
 
-public class Calculator {
-    public double calculate(int num1, int num2, char operator) throws ArithmeticException, OperatorException {
-        double result = 0;
+import java.util.LinkedList;
 
+public class Calculator {
+    private LinkedList<Double> result = new LinkedList<Double>();
+
+    public void calculate(int num1, int num2, char operator) throws ArithmeticException, OperatorException {
         switch(operator) {
-            case '+': result = num1 + num2; break;
-            case '-': result = num1 - num2; break;
-            case '*': result = num1 * num2; break;
-            case '/': result = num1 / num2; break;
+            case '+': result.add((double)num1 + num2); break;
+            case '-': result.add((double)num1 - num2); break;
+            case '*': result.add((double)num1 * num2); break;
+            case '/': result.add((double)num1 / num2); break;
             default: throw new OperatorException("잘못된 사칙연산 기호입니다. ");
         }
+    }
 
-        return result;
+    public double resultGetter(int index) { // 해당 index의 값을 반환해준다.
+        return result.get(index);
+    }
+
+    public double resultGetLast() { // result list의 마지막 값을 반환해준다.
+        return result.getLast();
+    }
+
+    public void resultSetter(int index, double element) { // result list에 해당 index에 element 값을 넣어준다.
+        result.set(index, element);
+    }
+
+    public int resultSize() { // result의 크기를 반환해준다.
+        return result.size();
+    }
+
+    public void resultRemove(int index) { // result list에서 index의 값을 삭제해준다.
+        result.remove(index);
+    }
+
+    public void resultInquiry() {
+        System.out.print("[ ");
+        for (double d : result)
+            System.out.print(d + " ");
+        System.out.println("]");
     }
 }
 
