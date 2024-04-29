@@ -31,8 +31,8 @@ public class Calculator {
         return result.size();
     }
 
-    public void resultRemove(int index) { // result list에서 index의 값을 삭제해준다.
-        result.remove(index);
+    public void removeResult() { // result list에서 첫번째 인덱스를 삭제한다.
+        result.removeFirst();
     }
 
     public void resultInquiry() {

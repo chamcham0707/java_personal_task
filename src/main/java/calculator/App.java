@@ -55,7 +55,7 @@ public class App {
             // 가장 첫번째 값을 삭제한다.
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             firstRemove = sc.next();
-            if (firstRemove.equals("remove")) calculator.resultRemove(0);
+            if (firstRemove.equals("remove")) calculator.removeResult();
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             inquiry = sc.next();
