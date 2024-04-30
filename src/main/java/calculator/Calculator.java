@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public abstract class Calculator {
     LinkedList<Double> results;
@@ -41,5 +42,15 @@ public abstract class Calculator {
             results.remove(index - 1);
             System.out.println("삭제를 완료했습니다.");
         } else System.out.println("아무것도 삭제하지 않았습니다.");
+    }
+
+    public void inquiryLarge() {
+        System.out.print("어떤 숫자보다 큰 값들을 출력할까요? ");
+        double num = sc.nextDouble();
+
+        // stream과 람다식을 이용하여 특정 숫자보다 큰 값을 출력하도록 하였다.
+        Stream<Double> stream = results.stream();
+        stream.filter(d -> d > num).forEach(d -> System.out.print(d + " "));
+        System.out.println();
     }
 }

@@ -16,7 +16,9 @@ public class App {
             System.out.println("4. 원의 넓이 결과 조회");
             System.out.println("5. 사칙 연산 결과 지우기");
             System.out.println("6. 원의 넓이 결과 지우기");
-            System.out.println("7. 종료");
+            System.out.println("7. 사칙연산 저장 값 중 입력 값보다 큰 값 출력");
+            System.out.println("8. 원의 넓이 저장 값 중 입력 값보다 큰 값 출력");
+            System.out.println("9. 종료");
             System.out.print("원하는 작업의 번호를 입력해주세요: ");
             input = sc.nextInt();
 
@@ -35,7 +37,9 @@ public class App {
                 case 4: circleCalculator.inquiryResults(); break;
                 case 5: arithmeticCalculator.removeResults(); break;
                 case 6: circleCalculator.removeResults(); break;
-                case 7:
+                case 7: arithmeticCalculator.inquiryLarge(); break;
+                case 8: circleCalculator.inquiryLarge(); break;
+                case 9:
                     System.out.print("정말 종료를 원하시면 exit를 입력해주세요: ");
                     String exit = sc.next();
                     if (exit.equals("exit")) return;
