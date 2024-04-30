@@ -1,7 +1,7 @@
 package calculator;
 
-public class RemainderOperator implements Operator {
-    public int operate(int num1, int num2) {
-        return num1 % num2;
+public class RemainderOperator<T extends Number> implements Operator<T> {
+    public double operate(T num1, T num2) {
+        return num1.doubleValue() % num2.doubleValue();
     }
 }

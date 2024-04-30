@@ -11,17 +11,15 @@ public class ArithmeticCalculator extends Calculator {
         operator = new Operator[]{new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator(), new RemainderOperator()};
     }
 
-
-
     public void calculate() throws ArithmeticException, OperatorException {
         System.out.print("첫 번째 숫자를 입력해주세요: ");
-        int num1 = sc.nextInt();
+        double num1 = sc.nextDouble();
         System.out.print("연산자를 입력해주세요: ");
         operatorType = OperatorType.findOperator(sc.next());
         System.out.print("두 번째 숫자를 입력해주세요: ");
-        int num2 = sc.nextInt();
+        double num2 = sc.nextDouble();
 
-        int result = 0;
+        double result = 0;
 
         switch (operatorType) {
             case PLUS: result = operator[0].operate(num1, num2); break;
