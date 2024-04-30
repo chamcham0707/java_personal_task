@@ -1,8 +1,9 @@
 package calculator;
 
 public class ArithmeticCalculator extends Calculator {
-
     Operator[] operator;
+
+    OperatorType operatorType;
 
     public ArithmeticCalculator() {
         super();
@@ -10,21 +11,24 @@ public class ArithmeticCalculator extends Calculator {
         operator = new Operator[]{new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator(), new RemainderOperator()};
     }
 
+
+
     public void calculate() throws ArithmeticException, OperatorException {
         System.out.print("첫 번째 숫자를 입력해주세요: ");
         int num1 = sc.nextInt();
         System.out.print("연산자를 입력해주세요: ");
-        char operation = sc.next().charAt(0);
+        operatorType = OperatorType.findOperator(sc.next());
         System.out.print("두 번째 숫자를 입력해주세요: ");
         int num2 = sc.nextInt();
 
         int result = 0;
-        switch(operation) {
-            case '+': result = operator[0].operate(num1, num2); break;
-            case '-': result = operator[1].operate(num1, num2); break;
-            case '*': result = operator[2].operate(num1, num2); break;
-            case '/': result = operator[3].operate(num1, num2); break;
-            case '%': result = operator[3].operate(num1, num2); break;
+
+        switch (operatorType) {
+            case PLUS: result = operator[0].operate(num1, num2); break;
+            case MINUS: result = operator[1].operate(num1, num2); break;
+            case MUL: result = operator[2].operate(num1, num2); break;
+            case DIV: result = operator[3].operate(num1, num2); break;
+            case REM: result = operator[3].operate(num1, num2); break;
             default: throw new OperatorException("잘못된 연산자입니다.");
         }
 
