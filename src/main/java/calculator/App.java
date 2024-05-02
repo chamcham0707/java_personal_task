@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> arithmeticCalculator = new ArithmeticCalculator<>(Double.class);
         CircleCalculator circleCalculator = new CircleCalculator();
         int input;
         while (true) {
@@ -24,15 +24,32 @@ public class App {
 
             switch (input) {
                 case 1:
+                    System.out.print("첫 번째 숫자를 입력해주세요: ");
+                    double num1 = sc.nextDouble();
+                    System.out.print("연산자를 입력해주세요: ");
+                    char operator = sc.next().charAt(0);
+                    System.out.print("두 번째 숫자를 입력해주세요: ");
+                    double num2 = sc.nextDouble();
+
+                    double result = 0;
                     try {
-                        arithmeticCalculator.calculate();
+                        result = (double) arithmeticCalculator.calculate(num1, num2, operator);
                     } catch (ArithmeticException e) {
                         System.out.println(e.getMessage());
                     } catch (OperatorException e) {
                         System.out.println(e.getMessage());
                     }
+
+                    arithmeticCalculator.setResults(result);
+                    System.out.println("결과: " + arithmeticCalculator.getLastResult());
                     break;
-                case 2: circleCalculator.calculate(); break;
+                case 2:
+                    System.out.print("반지름을 입력해주세요: ");
+                    double radius = sc.nextDouble();
+                    double results = circleCalculator.calculate(radius);
+                    circleCalculator.setResults(radius);
+                    System.out.println("결과: " + circleCalculator.getLastResult());
+                    break;
                 case 3: arithmeticCalculator.inquiryResults(); break;
                 case 4: circleCalculator.inquiryResults(); break;
                 case 5: arithmeticCalculator.removeResults(); break;

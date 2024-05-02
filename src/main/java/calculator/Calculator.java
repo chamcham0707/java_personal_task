@@ -13,9 +13,6 @@ public abstract class Calculator {
         results = new LinkedList<Double>();
     }
 
-    // ArithmeticCalculator class와 CircleCalculator class가 무조건 구현할 수 있도록 추상 메서드로 선언했다.
-    abstract void calculate() throws OperatorException;
-
     // 공통된 메소드이다.
     public double getLastResult() {
         return results.getLast();

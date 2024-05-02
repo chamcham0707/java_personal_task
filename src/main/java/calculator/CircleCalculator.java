@@ -8,12 +8,7 @@ public class CircleCalculator extends Calculator {
     // 또한, 외부에서 접근해서 바꿀 이유도 없어서 private으로 선언하였다.
     private static final double PI = 3.141592;
 
-    public void calculate() {
-        System.out.print("반지름을 입력해주세요: ");
-        int radius = sc.nextInt();
-
-        results.add(radius * radius * PI);
-
-        System.out.println("결과: " + getLastResult());
+    public double calculate(double radius) {
+        return radius * radius * PI;
     }
 }
